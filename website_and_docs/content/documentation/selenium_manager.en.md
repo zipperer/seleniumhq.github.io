@@ -118,7 +118,7 @@ The following table summarizes all the supported arguments supported by Selenium
 |`--browser-path <BROWSER_PATH>`|`browser-path = "BROWSER_PATH"`|`SE_BROWSER_PATH=BROWSER_PATH`|Browser path (absolute) for browser version detection (e.g., `/usr/bin/google-chrome`, `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`, `C:\Program Files\Google\Chrome\Application\chrome.exe`)|
 |`--driver-mirror-url <DRIVER_MIRROR_URL>`|`driver-mirror-url = "DRIVER_MIRROR_URL"`|`SE_DRIVER_MIRROR_URL=DRIVER_MIRROR_URL`|Mirror URL for driver repositories|
 |`--browser-mirror-url <BROWSER_MIRROR_URL>`|`browser-mirror-url = "BROWSER_MIRROR_URL"`|`SE_BROWSER_MIRROR_URL=BROWSER_MIRROR_URL`|Mirror URL for browser repositories|
-|`--output <OUTPUT>`|`output = "OUTPUT"`|`SE_OUTPUT=OUTPUT`|Output type: `LOGGER` (using `INFO`, `WARN`, etc.), `JSON` (custom JSON notation), or `SHELL` (Unix-like). Default: `LOGGER`|
+|`--output <OUTPUT>`|`output = "OUTPUT"`|`SE_OUTPUT=OUTPUT`|Output type: `LOGGER` (using `INFO`, `WARN`, etc.), `JSON` (custom JSON notation), `SHELL` (Unix-like), or `MIXED` (`INFO`, `WARN`, `DEBUG`, etc. to stderr and minimal `JSON` to stdout). Default: `LOGGER`|
 |`--os <OS>`|`os = "OS"`|`SE_OS=OS`|Operating system for drivers and browsers (i.e., `windows`, `linux`, or `macos`)|
 |`--arch <ARCH>`|`arch = "ARCH"`|`SE_ARCH=ARCH`|System architecture for drivers and browsers (i.e., `x32`, `x64`, or `arm64`)|
 |`--proxy <PROXY>`|`proxy = "PROXY"`|`SE_PROXY=PROXY`|HTTP proxy for network connection (e.g., `myproxy:port`, `myuser:mypass@myproxy:port`)|
@@ -159,8 +159,8 @@ Let's consider an example. A Selenium binding asks Selenium Manager to resolve c
 
 Selenium Manager includes two additional arguments two handle the cache, namely:
 
-- `--clear-cache`: To remove the cache folder.
-- `--clear-metadata`: To remove the metadata file.
+- `--clear-cache`: To remove the cache folder (equivalent to the environment variable `SE_CLEAR_CACHE=true`).
+- `--clear-metadata`: To remove the metadata file (equivalent to the environment variable `SE_CLEAR_METADATA=true`).
 
 ## Versioning
 Selenium Manager follows the same versioning schema as Selenium. Nevertheless, we use the major version 0 for Selenium Manager releases because it is still in beta. For example, the Selenium Manager binaries shipped with Selenium 4.12.0 corresponds to version 0.4.12.
@@ -208,6 +208,32 @@ DEBUG   Downloading chromedriver 117.0.5938.22 from https://edgedl.me.gvt1.com/e
 INFO    Driver path: C:\Users\boni\.cache\selenium\chromedriver\win64\117.0.5938.22\chromedriver.exe
 INFO    Browser path: C:\Users\boni\.cache\selenium\chrome\win64\117.0.5938.22\chrome.exe
 ```
+
+### Implementing Selenium Manager in Your Scripts
+
+{{< tabpane text=true >}}
+{{< tab header="Java" >}}
+{{< badge-code >}}
+{{< /tab >}}
+{{% tab header="Python" %}}
+**Previously**
+{{< gh-codeblock path="examples/python/tests/selenium_manager/usage.py#L5-L8" >}}
+**Selenium Manager**
+{{< gh-codeblock path="examples/python/tests/selenium_manager/usage.py#L10-L12" >}}
+{{< /tab >}}
+{{< tab header="CSharp" >}}
+{{< badge-code >}}
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+{{< badge-code >}}
+{{< /tab >}}
+{{< tab header="JavaScript" >}}
+{{< badge-code >}}
+{{< /tab >}}
+{{< tab header="Kotlin" >}}
+{{< badge-code >}}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Selenium Grid
 Selenium Manager allows you to configure the drivers automatically when setting up Selenium Grid. To that aim, you need to include the argument `--selenium-manager true` in the command to start Selenium Grid. For more details, visit the [Selenium Grid starting page](https://www.selenium.dev/documentation/grid/getting_started/).
@@ -299,6 +325,25 @@ In this case, the library to be installed is the following:
 ```
 sudo apt-get install libatk-bridge2.0-0
 ```
+
+### Using an environment variable for the driver path
+It's possible to use an environment variable to specify the driver path without using Selenium Manager.
+The following environment variables are supported:
+
+* SE_CHROMEDRIVER
+* SE_EDGEDRIVER
+* SE_GECKODRIVER
+* SE_IEDRIVER
+* SE_SAFARIDRIVER
+
+For example, to specify the path to the chromedriver, 
+you can set the `SE_CHROMEDRIVER` environment variable to the path of the chromedriver executable.
+The following bindings allow you to specify the driver path using an environment variable:
+
+* Ruby
+* Java
+
+This feature is available in the Selenium Ruby binding starting from version 4.25.0.
 
 ## Roadmap
 You can trace the work in progress in the [Selenium Manager project dashboard](https://github.com/orgs/SeleniumHQ/projects/5). Moreover, you can check the new features shipped with each Selenium Manager release in its [changelog file](https://github.com/SeleniumHQ/selenium/blob/trunk/rust/CHANGELOG.md).

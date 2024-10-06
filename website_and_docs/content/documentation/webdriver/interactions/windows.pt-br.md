@@ -17,9 +17,13 @@ usando um identificador. Cada janela tem um identificador único que permanece
 persistente em uma única sessão. Você pode pegar o identificador atual usando:
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}driver.getWindowHandle();{{< /tab >}}
+    {{< tab header="Java" text=true >}}
+{{< gh-codeblock path="examples/java/src/test/java/dev/selenium/interactions/WindowsTest.java#L16-L20" >}}
+{{< /tab >}}
   {{< tab header="Python" >}}driver.current_window_handle{{< /tab >}}
-  {{< tab header="CSharp" >}}driver.CurrentWindowHandle;{{< /tab >}}
+     {{< tab header="CSharp" text=true >}}
+  {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/WindowsTest.cs#L17-L21" >}}
+  {{< /tab >}}
   {{< tab header="Ruby" >}}driver.window_handle{{< /tab >}}
   {{< tab header="JavaScript" >}}await driver.getWindowHandle();{{< /tab >}}
   {{< tab header="Kotlin" >}}driver.windowHandle{{< /tab >}}
@@ -40,30 +44,9 @@ No entanto, o Selenium 4 fornece uma nova API [NewWindow](#criar-nova-janela-ou-
 que cria uma nova guia (ou) nova janela e muda automaticamente para ela.
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-//Store the ID of the original window
-String originalWindow = driver.getWindowHandle();
-
-//Check we don't have other windows open already
-assert driver.getWindowHandles().size() == 1;
-
-//Click the link which opens in a new window
-driver.findElement(By.linkText("new window")).click();
-
-//Wait for the new window or tab
-wait.until(numberOfWindowsToBe(2));
-
-//Loop through until we find a new window handle
-for (String windowHandle : driver.getWindowHandles()) {
-    if(!originalWindow.contentEquals(windowHandle)) {
-        driver.switchTo().window(windowHandle);
-        break;
-    }
-}
-
-//Wait for the new tab to finish loading content
-wait.until(titleIs("Selenium documentation"));
-  {{< /tab >}}
+   {{< tab header="Java" text=true >}}
+{{< gh-codeblock path="examples/java/src/test/java/dev/selenium/interactions/WindowsTest.java#L22-L29" >}}
+{{< /tab >}}
   {{< tab header="Python" >}}
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -98,31 +81,13 @@ with webdriver.Firefox() as driver:
     # Wait for the new tab to finish loading content
     wait.until(EC.title_is("SeleniumHQ Browser Automation"))
   {{< /tab >}}
-  {{< tab header="CSharp" >}}
-//Store the ID of the original window
-string originalWindow = driver.CurrentWindowHandle;
 
-//Check we don't have other windows open already
-Assert.AreEqual(driver.WindowHandles.Count, 1);
-
-//Click the link which opens in a new window
-driver.FindElement(By.LinkText("new window")).Click();
-
-//Wait for the new window or tab
-wait.Until(wd => wd.WindowHandles.Count == 2);
-
-//Loop through until we find a new window handle
-foreach(string window in driver.WindowHandles)
-{
-    if(originalWindow != window)
-    {
-        driver.SwitchTo().Window(window);
-        break;
-    }
-}
-//Wait for the new tab to finish loading content
-wait.Until(wd => wd.Title == "Selenium documentation");
+    {{< tab header="CSharp" text=true >}}
+  {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/WindowsTest.cs#L23-L30" >}}
   {{< /tab >}}
+  
+
+
   {{< tab header="Ruby" >}}
     #Store the ID of the original window
 original_window = driver.window_handle
@@ -201,59 +166,6 @@ wait.until(titleIs("Selenium documentation"))
   {{< /tab >}}
 {{< /tabpane >}}
 
-### Criar nova janela (ou) nova guia e alternar
-Cria uma nova janela (ou) guia e focará a nova janela ou guia na tela.
-Você não precisa mudar para trabalhar com a nova janela (ou) guia. Se você tiver mais de duas janelas
-(ou) guias abertas diferentes da nova janela, você pode percorrer as janelas ou guias que o WebDriver pode ver
-e mudar para aquela que não é a original.
-
-__Nota: este recurso funciona com Selenium 4 e versões posteriores.__
-
-{{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-// Opens a new tab and switches to new tab
-driver.switchTo().newWindow(WindowType.TAB);
-
-// Opens a new window and switches to new window
-driver.switchTo().newWindow(WindowType.WINDOW);
-  {{< /tab >}}
-  {{< tab header="Python" >}}
-    # Opens a new tab and switches to new tab
-driver.switch_to.new_window('tab')
-
-    # Opens a new window and switches to new window
-driver.switch_to.new_window('window')
-  {{< /tab >}}
-  {{< tab header="CSharp" >}}
-// Opens a new tab and switches to new tab
-driver.SwitchTo().NewWindow(WindowType.Tab)
-
-// Opens a new window and switches to new window
-driver.SwitchTo().NewWindow(WindowType.Window)
-  {{< /tab >}}
-  {{% tab header="Ruby" text=true %}}
-Opens a new tab and switches to new tab
-{{< gh-codeblock path="/examples/ruby/spec/interactions/windows_spec.rb#L9" >}}
-
-Opens a new window and switches to new window
-{{< gh-codeblock path="/examples/ruby/spec/interactions/windows_spec.rb#L15" >}}
-  {{% /tab %}}
-{{< tab header="JavaScript" text=true >}}
-Opens a new tab and switches to new tab
-{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L70" >}}
-
-Opens a new window and switches to new window:
-{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L75" >}}
-{{< /tab >}}
-  {{< tab header="Kotlin" >}}
-// Opens a new tab and switches to new tab
-driver.switchTo().newWindow(WindowType.TAB)
-
-// Opens a new window and switches to new window
-driver.switchTo().newWindow(WindowType.WINDOW)
-  {{< /tab >}}
-{{< /tabpane >}}
-
 ### Fechando uma janela ou guia
 
 Quando você fechar uma janela ou guia _e_ que não é a
@@ -263,13 +175,9 @@ amostra de código na seção anterior, você terá o identificador da janela
 anterior armazenado em uma variável. Junte isso e você obterá:
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-//Close the tab or window
-driver.close();
-
-//Switch back to the old tab or window
-driver.switchTo().window(originalWindow);
-  {{< /tab >}}
+ {{< tab header="Java" text=true >}}
+{{< gh-codeblock path="examples/java/src/test/java/dev/selenium/interactions/WindowsTest.java#L31-L34" >}}
+{{< /tab >}}
   {{< tab header="Python" >}}
     #Close the tab or window
 driver.close()
@@ -277,13 +185,11 @@ driver.close()
     #Switch back to the old tab or window
 driver.switch_to.window(original_window)
   {{< /tab >}}
-  {{< tab header="CSharp" >}}
-//Close the tab or window
-driver.Close();
 
-//Switch back to the old tab or window
-driver.SwitchTo().Window(originalWindow);
+   {{< tab header="CSharp" text=true >}}
+  {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/WindowsTest.cs#L32-L35" >}}
   {{< /tab >}}
+
   {{< tab header="Ruby" >}}
     #Close the tab or window
 driver.close
@@ -312,6 +218,55 @@ Esquecer de voltar para outro gerenciador de janela após fechar uma
 janela deixará o WebDriver em execução na página agora fechada e
 acionara uma **No Such Window Exception**. Você deve trocar
 de volta para um identificador de janela válido para continuar a execução.
+### Criar nova janela (ou) nova guia e alternar
+Cria uma nova janela (ou) guia e focará a nova janela ou guia na tela.
+Você não precisa mudar para trabalhar com a nova janela (ou) guia. Se você tiver mais de duas janelas
+(ou) guias abertas diferentes da nova janela, você pode percorrer as janelas ou guias que o WebDriver pode ver
+e mudar para aquela que não é a original.
+
+__Nota: este recurso funciona com Selenium 4 e versões posteriores.__
+
+{{< tabpane langEqualsHeader=true >}}
+  {{< tab header="Java" text=true >}}
+{{< gh-codeblock path="examples/java/src/test/java/dev/selenium/interactions/WindowsTest.java#L36-L42" >}}
+{{< /tab >}}
+  {{< tab header="Python" >}}
+    # Opens a new tab and switches to new tab
+driver.switch_to.new_window('tab')
+
+    # Opens a new window and switches to new window
+driver.switch_to.new_window('window')
+  {{< /tab >}}
+  
+  {{< tab header="CSharp" text=true >}}
+  {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/WindowsTest.cs#L37-L43" >}}
+  {{< /tab >}}
+  
+  
+  {{% tab header="Ruby" text=true %}}
+Opens a new tab and switches to new tab
+{{< gh-codeblock path="/examples/ruby/spec/interactions/windows_spec.rb#L9" >}}
+
+Opens a new window and switches to new window
+{{< gh-codeblock path="/examples/ruby/spec/interactions/windows_spec.rb#L15" >}}
+  {{% /tab %}}
+{{< tab header="JavaScript" text=true >}}
+Opens a new tab and switches to new tab
+{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L70" >}}
+
+Opens a new window and switches to new window:
+{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L75" >}}
+{{< /tab >}}
+  {{< tab header="Kotlin" >}}
+// Opens a new tab and switches to new tab
+driver.switchTo().newWindow(WindowType.TAB)
+
+// Opens a new window and switches to new window
+driver.switchTo().newWindow(WindowType.WINDOW)
+  {{< /tab >}}
+{{< /tabpane >}}
+
+
 
 ### Sair do navegador no final de uma sessão
 
@@ -319,9 +274,15 @@ Quando você terminar a sessão do navegador, você deve chamar a função _quit
 em vez de fechar:
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}driver.quit();{{< /tab >}}
+  
+  {{< tab header="Java" text=true >}}
+{{< gh-codeblock path="examples/java/src/test/java/dev/selenium/interactions/WindowsTest.java#L44-L45" >}}
+{{< /tab >}}
+  
   {{< tab header="Python" >}}driver.quit(){{< /tab >}}
-  {{< tab header="CSharp" >}}driver.Quit();{{< /tab >}}
+  {{< tab header="CSharp" text=true >}}
+  {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/WindowsTest.cs#L45-L46" >}}
+  {{< /tab >}}
   {{< tab header="Ruby" >}}driver.quit{{< /tab >}}
   {{< tab header="JavaScript" >}}await driver.quit();{{< /tab >}}
   {{< tab header="Kotlin" >}}driver.quit(){{< /tab >}}
@@ -503,15 +464,13 @@ size = driver.manage.window.size
 width1 = size.width
 height1 = size.height
   {{< /tab >}}
-  {{< tab header="JavaScript" >}}
-// Access each dimension individually
-const { width, height } = await driver.manage().window().getRect();
+{{< tab header="JavaScript" text=true >}}
+Access each dimension individually
+{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L93" >}}
 
-// Or store the dimensions and query them later
-const rect = await driver.manage().window().getRect();
-const width1 = rect.width;
-const height1 = rect.height;
-  {{< /tab >}}
+(or) store the dimensions and query them later
+{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L96-L98" >}}
+{{< /tab >}}
   {{< tab header="Kotlin" >}}
 //Access each dimension individually
 val width = driver.manage().window().size.width
@@ -581,15 +540,13 @@ rect  = driver.manage.window.rect
 x1 = rect.x
 y1 = rect.y
   {{< /tab >}}
-  {{< tab header="JavaScript" >}}
-// Access each dimension individually
-const { x, y } = await driver.manage().window().getRect();
+{{< tab header="JavaScript" text=true >}}
+Access each dimension individually
+{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L108" >}}
 
-// Or store the dimensions and query them later
-const rect = await driver.manage().window().getRect();
-const x1 = rect.x;
-const y1 = rect.y;
-  {{< /tab >}}
+(or) store the dimensions and query them later
+{{< gh-codeblock path="examples/javascript/test/interactions/windows.spec.js#L111-L113" >}}
+{{< /tab >}}
   {{< tab header="Kotlin" >}}
 // Access each dimension individually
 val x = driver.manage().window().position.x

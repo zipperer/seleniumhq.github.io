@@ -20,12 +20,12 @@ open your website. This can be achieved in a single line:
 {{< tab header="Python" text=true >}}
 {{< gh-codeblock path="examples/python/tests/interactions/test_navigation.py#L6" >}}
 {{< /tab >}}
-  {{< tab header="CSharp" >}}
-driver.Navigate().GoToUrl(@"https://selenium.dev");
+  {{< tab header="CSharp" text=true >}}
+{{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/NavigationTest.cs#L17-L20" >}}
   {{< /tab >}}
-  {{< tab header="Ruby" >}}
-driver.navigate.to 'https://selenium.dev'
-  {{< /tab >}}
+{{< tab header="Ruby" text=true >}}
+{{< gh-codeblock path="examples/ruby/spec/interactions/navigation_spec.rb#L7-L9" >}}
+{{< /tab >}}
   {{< tab header="JavaScript" text=true >}}
   {{< gh-codeblock path="examples/javascript/test/interactions/navigation.spec.js#L16-L20" >}}
   {{< /tab >}}
@@ -50,8 +50,12 @@ Pressing the browser's back button:
 {{< tab header="Python" text=true >}}
 {{< gh-codeblock path="examples/python/tests/interactions/test_navigation.py#L11" >}}
 {{< /tab >}}
-  {{< tab header="CSharp" >}}driver.Navigate().Back();{{< /tab >}}
-  {{< tab header="Ruby" >}}driver.navigate.back{{< /tab >}}
+  {{< tab header="CSharp" text=true >}}
+ {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/NavigationTest.cs#L24-L25" >}}
+  {{< /tab >}}
+{{< tab header="Ruby" text=true >}}
+{{< gh-codeblock path="examples/ruby/spec/interactions/navigation_spec.rb#L15" >}}
+{{< /tab >}}
   {{< tab header="JavaScript" text=true >}}
   {{< gh-codeblock path="examples/javascript/test/interactions/navigation.spec.js#L24-L25" >}}
   {{< /tab >}}
@@ -68,8 +72,12 @@ Pressing the browser's forward button:
 {{< tab header="Python" text=true >}}
 {{< gh-codeblock path="examples/python/tests/interactions/test_navigation.py#L15" >}}
 {{< /tab >}}
-  {{< tab header="CSharp" >}}driver.Navigate().Forward();{{< /tab >}}
-  {{< tab header="Ruby" >}}driver.navigate.forward{{< /tab >}}
+   {{< tab header="CSharp" text=true >}}
+ {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/NavigationTest.cs#L29-L30" >}}
+  {{< /tab >}}
+{{< tab header="Ruby" text=true >}}
+{{< gh-codeblock path="examples/ruby/spec/interactions/navigation_spec.rb#L23" >}}
+{{< /tab >}}
 {{< tab header="JavaScript" text=true >}}
 {{< gh-codeblock path="examples/javascript/test/interactions/navigation.spec.js#L29-L30" >}}
 {{< /tab >}}
@@ -87,8 +95,12 @@ Refresh the current page:
 {{< tab header="Python" text=true >}}
 {{< gh-codeblock path="examples/python/tests/interactions/test_navigation.py#L19" >}}
 {{< /tab >}}
-  {{< tab header="CSharp" >}}driver.Navigate().Refresh();{{< /tab >}}
-  {{< tab header="Ruby" >}}driver.navigate.refresh{{< /tab >}}
+  {{< tab header="CSharp" text=true >}}
+ {{< gh-codeblock path="examples/dotnet/SeleniumDocs/Interactions/NavigationTest.cs#L34-L35" >}}
+  {{< /tab >}}
+{{< tab header="Ruby" text=true >}}
+{{< gh-codeblock path="examples/ruby/spec/interactions/navigation_spec.rb#L29" >}}
+{{< /tab >}}
 {{< tab header="JavaScript" text=true >}}
 {{< gh-codeblock path="examples/javascript/test/interactions/navigation.spec.js#L34-L35" >}}
 {{< /tab >}}

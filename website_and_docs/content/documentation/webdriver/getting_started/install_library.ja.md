@@ -25,7 +25,7 @@ Installation of Selenium libraries for Java is accomplished using a build tool.
 ### Maven
 Specify the dependencies in the project's `pom.xml` file:
 
-{{< gh-codeblock path="examples/java/pom.xml#L29-L33" >}}
+{{< gh-codeblock path="examples/java/pom.xml#L30-L34" >}}
 
 ### Gradle
 Specify the dependency in the project `build.gradle` file as `testImplementation`:
@@ -44,6 +44,7 @@ There are a couple different ways to install Selenium.
 ```shell
 pip install selenium
 ```
+<br>
 
 ### Download
 
@@ -53,6 +54,7 @@ Alternatively you can download the [PyPI source archive](https://pypi.org/projec
 ```shell
 python setup.py install
 ```
+<br>
 
 ### Require in project
 
@@ -71,12 +73,14 @@ There are a few options for installing Selenium.
 ```shell
 Install-Package Selenium.WebDriver
 ```
+<br>
 
 ### .NET CLI
 
 ```shell
 dotnet add package Selenium.WebDriver
 ```
+<br>
 
 ### CSProj
 
@@ -123,6 +127,7 @@ Selenium can be installed two different ways.
 ```shell
 gem install selenium-webdriver
 ```
+<br>
 
 ### Add to project's gemfile
 
@@ -140,6 +145,7 @@ Selenium is typically installed using npm.
 ```shell
 npm install selenium-webdriver
 ```
+<br>
 
 ### Add to project
 
