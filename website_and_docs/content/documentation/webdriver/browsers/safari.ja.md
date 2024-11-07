@@ -1,9 +1,9 @@
 ---
-title: "Safari specific functionality"
+title: "Safari特有の機能"
 linkTitle: "Safari"
 weight: 10
 description: >-
-    These are capabilities and features specific to Apple Safari browsers.
+    これらは、Apple Safariブラウザに特有の機能と機能です。
 aliases: [
 "/ja/documentation/capabilities/safari"
 ]
@@ -96,7 +96,7 @@ To use this version in your code:
 {{< badge-code >}}
 {{< /tab >}}
 {{% tab header="Python" %}}
-{{< badge-code >}}
+{{< gh-codeblock path="examples/python/tests/browsers/test_safari.py#L25-L30" >}}
 {{% /tab %}}
 {{< tab header="CSharp" >}}
 {{< badge-code >}}
